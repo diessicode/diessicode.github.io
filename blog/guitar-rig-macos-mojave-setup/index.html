@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link type="text/plain" rel="author" href="/humans.txt">
+  
+  <title>
+    
+    Setup for Audio Inteface with Guitar Rig 5 on macOS Mojave
+    
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Diéssica Gurskas">
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <meta name="twitter:site" content="@diessicode">
+  <!--   <meta property="twitter:image:src" content="https://diessi.ca/media/social.png">
+  <meta property="og:image" content="https://diessi.ca/media/social.png">
+  <meta itemprop="image" content="https://diessi.ca/media/social.png"/> -->
+
+  
+  <meta name="description" content="Had some trouble setting up Guitar Rig 5 on macOS Mojave the other day. Listening back the guitar output not straightforward: although the signals see...">
+  <meta property="og:description" content="Had some trouble setting up Guitar Rig 5 on macOS Mojave the other day. Listening back the guitar output not straightforward: although the signals see...">
+  <meta itemprop="description" content="Had some trouble setting up Guitar Rig 5 on macOS Mojave the other day. Listening back the guitar output not straightforward: although the signals see...">
+  <meta name="twitter:description" content="Had some trouble setting up Guitar Rig 5 on macOS Mojave the other day. Listening back the guitar output not straightforward: although the signals see...">
+  
+  <link rel="alternative" href="https://diessi.ca/feed.xml" type="application/atom+xml">
+  <link rel="manifest" href="https://diessi.ca/manifest.json">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/assets/images/icons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/assets/images/icons/favicon-16x16.png" sizes="16x16">
+  <link rel="mask-icon" href="/assets/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="theme-color" content="#b45f06">
+  <link rel="stylesheet" href="/assets/styles/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism-solarizedlight.min.css">
+
+  
+</head>
+
+
+<body>
+
+  <main>
+    <header>
+  <nav class="menu">
+    <a
+      href="/"
+      class="menu-item -home ">
+        diessi.ca
+    </a>
+
+    
+      <a
+        href="/blog"
+        class="menu-item -active"
+      >
+        Blog
+      </a>
+    
+      <a
+        href="/about"
+        class="menu-item"
+      >
+        About
+      </a>
+    
+      <a
+        href="/work"
+        class="menu-item"
+      >
+        Work
+      </a>
+    
+  </nav>
+</header>
+
+
+    <div class="content">
+      <article id="post-guitar-rig-macos-mojave-setup" class="article">
+  <header class="header">
+    <a href="/blog/guitar-rig-macos-mojave-setup/">
+      <time class="article-date" datetime="2019-08-19T01:19:05.000Z
+      ">
+        August 18, 2019
+      </time>
+    </a>
+
+    <h1 class="article-title">
+      Setup for Audio Inteface with Guitar Rig 5 on macOS Mojave
+    </h1>
+  </header>
+
+  <p>Had some trouble setting up <a href="https://www.native-instruments.com/en/products/komplete/guitar/guitar-rig-5-pro/">Guitar Rig 5</a> on macOS Mojave the other day. Listening back the guitar output not straightforward: although the signals seemed to be sent from my guitar to the audio interface, and from the interface to Guitar Rig, somehow it’d still not work. Guitar Rig 5 seems not to get it right by itself. This how I’ve fixed it.</p>
+<pre><code class="language-sh">macOS Mojave Version 10.10.14
+Guitar Rig Pro 5.2.2
+Audio Interface Steinberg UR22mkII
+</code></pre>
+<h2 id="audio-midi-setup">Audio MIDI setup <a class="title-anchor" href="#audio-midi-setup" aria-hidden="true">¶</a></h2>
+<p>Instead of using my audio interface as the input <strong>and output</strong> device on Guitar Rig, I had to use an “aggregate device”. This is how you can do it too.</p>
+<ol>
+<li>
+<p>Open “Audio MIDI setup” in your Mac. (It’s a tiny secret sound manager shipped along with the system, you’ll find it.)</p>
+</li>
+<li>
+<p>At the very bottom of the app, there is a small + (“plus”) button wherein you should select <em>“Create an aggregate device”</em>.</p>
+</li>
+<li>
+<p>Set up your “aggregate device” with your 1) audio inteface and 2) speakers/headphones/whatever – which should be all shown up there, given the setup is correct. Remember to give your device a remarkable name – I suggest <em>FUCK COMPUTERS AND AUDIO BOTH NEVER WORK</em>, or something more chill.</p>
+</li>
+</ol>
+<figure style="text-align: center;"><picture><img src="../../media/2019/guitar-rig-macos-mojave-setup/audio-midi-setup.png"  alt="Audio MIDI Setup app open showing audio device with both devices'"></picture>
+<figcaption>My custom device in Audio MIDI Setup on macOS.</figcaption></figure>
+<ol start="4">
+<li>Go back to Guitar Rig. In the context menu “File”, go to <em>“Audio and MIDI Settings”</em>. In the “Audio” tab, select your aggregate device as the <strong>device</strong>, instead of only the audio interface as you were doing before; then configure input/output as expected in the “Routing” tab.</li>
+</ol>
+<p>Should work! If it doesn’t, <a href="https://support.native-instruments.com/hc/en-us/articles/210275885-I-Cannot-Get-Any-Sound-Output-from-GUITAR-RIG-5">this guide by Native Instruments on how to troubleshoot audio</a> and others guides on the website might help. Depending on your audio interface, make sure the right driver setup is in place – you can try out <a href="http://www.asio4all.org/">ASIO4ALL</a>.</p>
+<img src="../../media/2019/guitar-rig-macos-mojave-setup/guitar-rig.png"  alt="Guitar Rig app showing its custom amps">
+<p>If it still doesn’t work, I am sorry and prolly have no idea. Have fun.</p>
+
+
+  <footer class="article-footer">
+
+    <div class="wrapper">
+        
+        
+          <p class="tags">
+            <b>Tags</b>:
+            <a class="tag-link" href="/blog/tags/music/">music</a>
+          </p>
+          
+          <a class="article-comment" href="https://github.com/diessica/diessica.github.io/issues/new?title=[Discussion] Setup for Audio Inteface with Guitar Rig 5 on macOS Mojave&body=> About https://diessi.ca/blog/guitar-rig-macos-mojave-setup/"">Add a comment</a>
+  </div>
+  
+  
+    <hr class="-long">
+  
+    
+    <nav class="article-navigation">
+  
+      
+      <a class="item -prev" href="/blog/omg-climate/">
+        
+        OMG Climate: Reflecting Together on the Climate Catastrophe
+        
+      </a>
+      
+  
+       
+  
+    </nav>
+    
+  </footer>
+
+</article>
+    </div>
+  </main>
+
+  <script src="https://use.typekit.net/kgi4nfh.js"></script>
+  <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+</body>
+</html>

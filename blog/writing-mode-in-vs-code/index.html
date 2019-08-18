@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link type="text/plain" rel="author" href="/humans.txt">
+  
+  <title>
+    
+    Writing Mode in VS Code
+    
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Diéssica Gurskas">
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <meta name="twitter:site" content="@diessicode">
+  <!--   <meta property="twitter:image:src" content="https://diessi.ca/media/social.png">
+  <meta property="og:image" content="https://diessi.ca/media/social.png">
+  <meta itemprop="image" content="https://diessi.ca/media/social.png"/> -->
+
+  
+  <meta name="description" content="I’m a big fan of writing. I’m also a big fan of using my code editor and Markdown for that!
+
+My &quot;writing mode&quot; in VS Code, with the dark theme enabled...">
+  <meta property="og:description" content="I’m a big fan of writing. I’m also a big fan of using my code editor and Markdown for that!
+
+My &quot;writing mode&quot; in VS Code, with the dark theme enabled...">
+  <meta itemprop="description" content="I’m a big fan of writing. I’m also a big fan of using my code editor and Markdown for that!
+
+My &quot;writing mode&quot; in VS Code, with the dark theme enabled...">
+  <meta name="twitter:description" content="I’m a big fan of writing. I’m also a big fan of using my code editor and Markdown for that!
+
+My &quot;writing mode&quot; in VS Code, with the dark theme enabled...">
+  
+  <link rel="alternative" href="https://diessi.ca/feed.xml" type="application/atom+xml">
+  <link rel="manifest" href="https://diessi.ca/manifest.json">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/assets/images/icons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/assets/images/icons/favicon-16x16.png" sizes="16x16">
+  <link rel="mask-icon" href="/assets/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="theme-color" content="#b45f06">
+  <link rel="stylesheet" href="/assets/styles/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism-solarizedlight.min.css">
+
+  
+</head>
+
+
+<body>
+
+  <main>
+    <header>
+  <nav class="menu">
+    <a
+      href="/"
+      class="menu-item -home ">
+        diessi.ca
+    </a>
+
+    
+      <a
+        href="/blog"
+        class="menu-item -active"
+      >
+        Blog
+      </a>
+    
+      <a
+        href="/about"
+        class="menu-item"
+      >
+        About
+      </a>
+    
+      <a
+        href="/work"
+        class="menu-item"
+      >
+        Work
+      </a>
+    
+  </nav>
+</header>
+
+
+    <div class="content">
+      <article id="post-writing-mode-in-vs-code" class="article">
+  <header class="header">
+    <a href="/blog/writing-mode-in-vs-code/">
+      <time class="article-date" datetime="2018-02-28T05:30:00.000Z
+      ">
+        February 28, 2018
+      </time>
+    </a>
+
+    <h1 class="article-title">
+      Writing Mode in VS Code
+    </h1>
+  </header>
+
+  <p>I’m a big fan of writing. I’m also a big fan of using my <strong>code editor</strong> and <strong>Markdown</strong> for that!</p>
+<figure><img src="../../media/2018/vs-code-writing-mode.png" alt="Screenshot of the VS Code in the zen mode without any clutter">
+<figcaption>My "writing mode" in VS Code, with the dark theme enabled.</figcaption></figure>
+<p>Code editors are usually packed with a bunch of useful features, such as multi-selection, syntax highlighting, a file tree easy to operate, and sometimes even <a href="https://code.visualstudio.com/docs/languages/markdown">Markdown support</a> – which I need for writing my articles, notes, to-do lists, and absolutely everything I can write using Markdown. I love having a consistent workflow and that’s crucial to me, so why not?</p>
+<p>After configuring my editor of choice, VS Code, to get rid of the coding mode clutter (and also after <a href="https://github.com/Microsoft/vscode/pull/40757">an important update on its zen mode</a> ❤️), I’ve finally achieved a totally distraction-free writing experience!</p>
+<h2 id="setting-up-the-writing-mode">Setting up the “Writing Mode” <a class="title-anchor" href="#setting-up-the-writing-mode" aria-hidden="true">¶</a></h2>
+<h3 id="1-user-settings">1. User Settings <a class="title-anchor" href="#1-user-settings" aria-hidden="true">¶</a></h3>
+<p>There are some important details to achieve total focus on writing. No line numbers, word wrap enabled, comfortable line height, no rulers, are some of them.</p>
+<p>Since I only write in Markdown, I only set up those settings (and other tweaks) specifically for that language.</p>
+<pre><code class="language-js"><span class="token comment" spellcheck="true">// github.com/diessica/dotfiles/blob/master/vscode/settings.json</span>
+<span class="token punctuation">{</span>
+  <span class="token operator">...</span><span class="token punctuation">.</span>
+
+  <span class="token string">"[markdown]"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// force centering in zen mode</span>
+    <span class="token string">"zenMode.centerLayout"</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// use the beautiful duospace font when available</span>
+    <span class="token string">"editor.fontFamily"</span><span class="token punctuation">:</span> <span class="token string">"iA Writer Duospace, monospace"</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// enable word wrap, since horizontal scroll while writing isn't human</span>
+    <span class="token string">"editor.wordWrap"</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// i don't need line numbers, i'm not coding</span>
+    <span class="token string">"editor.lineNumbers"</span><span class="token punctuation">:</span> <span class="token string">"off"</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// light by default, but can be easily toggled to dark</span>
+    <span class="token string">"workbench.colorTheme"</span><span class="token punctuation">:</span> <span class="token string">"Default Light+"</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// i don't need rules, i'm not coding</span>
+    <span class="token string">"editor.rulers"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// larger text, to improve focus on writing</span>
+    <span class="token string">"editor.fontSize"</span><span class="token punctuation">:</span> <span class="token number">14</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// more comfortable line height</span>
+    <span class="token string">"editor.lineHeight"</span><span class="token punctuation">:</span> <span class="token number">25</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true">// disable editor suggestions based on previous words</span>
+    <span class="token string">"editor.quickSuggestions"</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p class="note">You can learn more about this file by checking the docs on <a href="https://code.visualstudio.com/docs/getstarted/settings">"User and Workspace Settings"</a>.</p>
+<p>Now, <strong>toggle zen mode</strong> in VS Code (see <a href="https://code.visualstudio.com/docs/getstarted/keybindings">Keybindings</a>, or <code>View &gt; Toggle Zen Mode</code>) and check if that fits you!</p>
+<h3 id="2-theme">2. Theme <a class="title-anchor" href="#2-theme" aria-hidden="true">¶</a></h3>
+<p>Honestly, I think the default themes provided by VS Code do a great job. I use Dark+ as the dark theme; for light themes, either Quiet Light or Solarized Light.</p>
+<p class="note">If you don't like them, feel free to pick anything else, since most themes provide sufficient Markdown support anyway. Just don't procrastinate – a good theme won't make you a better writer.</p>
+<h3 id="3-font">3. Font <a class="title-anchor" href="#3-font" aria-hidden="true">¶</a></h3>
+<p>My font of choice for writing is the <a href="https://github.com/iaolo/iA-Fonts/tree/master/iA%20Writer%20Duospace">Duospace</a>, designed by the people behind the text editor <a href="https://ia.net/writer/">iaWriter</a>. It’s a free and beautiful font shaped for the perfect writing experience.</p>
+<h3 id="4-extensions">4. Extensions <a class="title-anchor" href="#4-extensions" aria-hidden="true">¶</a></h3>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">Spell Checker</a> catches your spelling errors.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.wordcount">Word Count</a> helps you to not to be too wordy.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">Markdown All in One</a> gives you some extra power to play with Markdown files.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=mushan.vscode-paste-image">Paste Image</a> lets you directly paste images from clipboard to files.</li>
+</ul>
+<h2 id="extra-tips">Extra tips <a class="title-anchor" href="#extra-tips" aria-hidden="true">¶</a></h2>
+<ul>
+<li><a href="https://code.visualstudio.com/docs/languages/markdown#_markdown-preview">VS Code’s Markdown Preview</a> is your friend – use it when you’re done with writing!</li>
+<li>Configure the spell checker for your language, there are dictionary extensions for that available in the <a href="https://marketplace.visualstudio.com/">marketplace</a>. I also have <a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-portuguese-brazilian">the Brazilian Portuguese package</a> installed, for instance.</li>
+<li>Like extensions? Keep exploring! The extension <a href="https://marketplace.visualstudio.com/items?itemName=shinnn.alex">alex</a>, for instance, catches insensitive, inconsiderate writing in texts.</li>
+<li>Learn the Markdown keybindings provided by the All in One extension for a better workflow.</li>
+</ul>
+<p>Happy writing! 🌟</p>
+
+
+  <footer class="article-footer">
+
+    <div class="wrapper">
+        
+        
+          <p class="tags">
+            <b>Tags</b>:
+            <a class="tag-link" href="/blog/tags/workflow/">workflow</a>
+          </p>
+          
+          <a class="article-comment" href="https://github.com/diessica/diessica.github.io/issues/new?title=[Discussion] Writing Mode in VS Code&body=> About https://diessi.ca/blog/writing-mode-in-vs-code/"">Add a comment</a>
+  </div>
+  
+  
+    <hr class="-long">
+  
+    
+    <nav class="article-navigation">
+  
+      
+      <a class="item -prev" href="/blog/my-hacking-adventure-in-lithuania/">
+        
+        My Hacking Adventure in Lithuania
+        
+      </a>
+      
+  
+      
+      <a class="item -next" href="/blog/ttt/">
+        
+        T. T. T.
+        
+      </a>
+       
+  
+    </nav>
+    
+  </footer>
+
+</article>
+    </div>
+  </main>
+
+  <script src="https://use.typekit.net/kgi4nfh.js"></script>
+  <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+</body>
+</html>

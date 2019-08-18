@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link type="text/plain" rel="author" href="/humans.txt">
+  
+  <title>
+    
+    Working Better with Git for a Clear History
+    
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Diéssica Gurskas">
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <meta name="twitter:site" content="@diessicode">
+  <!--   <meta property="twitter:image:src" content="https://diessi.ca/media/social.png">
+  <meta property="og:image" content="https://diessi.ca/media/social.png">
+  <meta itemprop="image" content="https://diessi.ca/media/social.png"/> -->
+
+  
+  <meta name="description" content="Your teammate worked on a few improvements in all forms of the company’s website. At some point you, also a programmer, are asked for a code review.
+T...">
+  <meta property="og:description" content="Your teammate worked on a few improvements in all forms of the company’s website. At some point you, also a programmer, are asked for a code review.
+T...">
+  <meta itemprop="description" content="Your teammate worked on a few improvements in all forms of the company’s website. At some point you, also a programmer, are asked for a code review.
+T...">
+  <meta name="twitter:description" content="Your teammate worked on a few improvements in all forms of the company’s website. At some point you, also a programmer, are asked for a code review.
+T...">
+  
+  <link rel="alternative" href="https://diessi.ca/feed.xml" type="application/atom+xml">
+  <link rel="manifest" href="https://diessi.ca/manifest.json">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/assets/images/icons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/assets/images/icons/favicon-16x16.png" sizes="16x16">
+  <link rel="mask-icon" href="/assets/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="theme-color" content="#b45f06">
+  <link rel="stylesheet" href="/assets/styles/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism-solarizedlight.min.css">
+
+  
+</head>
+
+
+<body>
+
+  <main>
+    <header>
+  <nav class="menu">
+    <a
+      href="/"
+      class="menu-item -home ">
+        diessi.ca
+    </a>
+
+    
+      <a
+        href="/blog"
+        class="menu-item -active"
+      >
+        Blog
+      </a>
+    
+      <a
+        href="/about"
+        class="menu-item"
+      >
+        About
+      </a>
+    
+      <a
+        href="/work"
+        class="menu-item"
+      >
+        Work
+      </a>
+    
+  </nav>
+</header>
+
+
+    <div class="content">
+      <article id="post-working-better-with-git-for-a-clear-history" class="article">
+  <header class="header">
+    <a href="/blog/working-better-with-git-for-a-clear-history/">
+      <time class="article-date" datetime="2018-08-04T10:00:00.000Z
+      ">
+        August 04, 2018
+      </time>
+    </a>
+
+    <h1 class="article-title">
+      Working Better with Git for a Clear History
+    </h1>
+  </header>
+
+  <p>Your teammate worked on a few improvements in all forms of the company’s website. At some point you, also a programmer, are asked for a code review.</p>
+<p>This is the feature branch’s <strong>commit history</strong> you get in the Pull Request:</p>
+<pre><code class="language-sh">[290xx26] Resolve merge conflicts
+[9efxxf2] Refactor event listener for form fields
+[5d9xx5a] Update snapshots
+[948xxfa] Update dispatch event
+[f5xxea1] WIP
+[f8xxaae] Revert change
+[49xxf55e] Revert changes
+[02xxdf1] Update snapshots
+[21xx329] Pass down prop
+[28xxa865] Fix onChange event and add minimal design  in form
+[cfxx37c] U[date snapshots
+[cfxx36c] Update form to handle onChange event for autofill
+[242xx25] Fix another bug with onChange
+[f7xx738] Update form component
+[09xx868] Update snapshots
+</code></pre>
+<p>It seems like a lot, when actually those improvements are simply 1) fixing a bug with event handling and 2) introducing a minimal style to them. It just that it takes time to visualise that.</p>
+<p>Indeed, committing often to a branch is a good practice<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> and commits are supposed to be low-level rather than huge. However, a commit is applicable when you have a meaningful, self-contained batch of work to log to the history – and updating Jest snapshots is not it.</p>
+<p>How about the following history?</p>
+<pre><code class="language-sh">[9efxxf2] Refactor event listener for form fields
+[cfxx37c] Add minimal design in form
+[cfxx36c] Update form to handle onChange event for autofill
+</code></pre>
+<p>That history communicates in a clear way <strong>what</strong> in the codebase has been changed in order to get the improvements done. If you want to know <strong>how</strong> it’s changed, it’s just a matter of checking out a particular commit.</p>
+<h2 id="why-a-clear-history-matters">Why a clear history matters <a class="title-anchor" href="#why-a-clear-history-matters" aria-hidden="true">¶</a></h2>
+<p>Apart from facilitating code reviews, since reviewers could grasp the context of the changes right at the first glimpse, <strong>a clear Git history is healthy for the project</strong>.</p>
+<p>When commits started to reflect one’s workflow rather than the work done itself, the history turns into a mess of both meaningful and meaningless logs, hard to navigate through and undo changes (since commits are “checkpoints” of work). It’s highly likely that, as time goes by, developers will stop caring about the source code history as the powerful resource it is.</p>
+<blockquote>
+<p>The final Git history should reflect <strong>your work</strong>, not the way you worked.</p>
+</blockquote>
+<p>You begin to lose the benefit of source code management with a messy history, which was supposed to reflect how the codebase evolved over time.</p>
+<h2 id="a-better-relationship-with-git">A better relationship with Git <a class="title-anchor" href="#a-better-relationship-with-git" aria-hidden="true">¶</a></h2>
+<p>There are very common comprehensible reasons – yet not excuses at all! – for developers to unnecessarily commit. I can think of:</p>
+<ol>
+<li>“I had to update snapshots/fix unit test/code formatting/a typo in something I introduced.”</li>
+<li>“I had to merge master.”</li>
+<li>“I wanted to save my work.”</li>
+<li>“I don’t necessarily follow a clear flow – I am productive when I work in iterative way and usually do a lot of things at once.”</li>
+</ol>
+<p>They can all be worked out by developing a better relationship with Git itself. That might take a while at first, but when it’s part of your daily workflow, you barely think about it at all. <em>(I promise!)</em></p>
+<h3 id="first-lets-talk-git-rebasing">First, let’s talk Git rebasing <a class="title-anchor" href="#first-lets-talk-git-rebasing" aria-hidden="true">¶</a></h3>
+<p><a href="https://git-scm.com/docs/git-rebase">Git rebase</a> is a very powerful tool to reorganise your commits. It does a lot, so I won’t get deep into it.</p>
+<p>The command <code>git rebase</code> has an important tool you should get comfortable with: <strong>interactive rebase</strong>. Let’s say we want to reorganise the latest 3 commits:</p>
+<pre><code class="language-bash"><span class="token function">git</span> rebase --interactive HEAD~3
+</code></pre>
+<p class="note"><code>HEAD</code> points to the current branch in your Git repository. You can use @ as an alias as well: <code>@~3</code>, or the commit hash.</p>
+<p>Interactive rebase will provide you a text interface with the list of the commits (in this case, within the range <code>HEAD~3…HEAD</code>) that are about to be rebased and actions you can apply to them:</p>
+<pre><code class="language-bash">pick <span class="token punctuation">[</span>242xx25<span class="token punctuation">]</span> Fix another bug with onChange
+pick <span class="token punctuation">[</span>f7xx738<span class="token punctuation">]</span> Update form component
+pick <span class="token punctuation">[</span>09xx868<span class="token punctuation">]</span> Update snapshots
+
+<span class="token comment" spellcheck="true"># Rebase 242xx25..09xx868 onto 242xx25</span>
+<span class="token comment" spellcheck="true">#</span>
+<span class="token comment" spellcheck="true"># Commands:</span>
+<span class="token comment" spellcheck="true">#  p, pick = use commit</span>
+<span class="token comment" spellcheck="true">#  r, reword = use commit, but edit the commit message</span>
+<span class="token comment" spellcheck="true">#  e, edit = use commit, but stop for amending</span>
+<span class="token comment" spellcheck="true">#  s, squash = use commit, but meld into previous commit</span>
+<span class="token comment" spellcheck="true">#  f, fixup = like "squash", but discard this commit's log message</span>
+<span class="token comment" spellcheck="true">#  x, exec = run command (the rest of the line) using shell</span>
+<span class="token comment" spellcheck="true">#</span>
+<span class="token comment" spellcheck="true"># These lines can be re-ordered; they are executed from top to bottom.</span>
+<span class="token comment" spellcheck="true">#</span>
+<span class="token comment" spellcheck="true"># If you remove a line here THAT COMMIT WILL BE LOST.</span>
+<span class="token comment" spellcheck="true">#</span>
+<span class="token comment" spellcheck="true"># However, if you remove everything, the rebase will be aborted.</span>
+<span class="token comment" spellcheck="true">#</span>
+<span class="token comment" spellcheck="true"># Note that empty commits are commented out</span>
+</code></pre>
+<p class="note"><code>pick</code> just means that commit is included. It's the default.</p>
+<p>Editing that file (either by applying actions to commits or reordering them) and closing it will reapply those commits to the branch. We’ll explore some scenarios where that is useful.</p>
+<h3 id="rebase-instead-of-merge">Rebase instead of merge <a class="title-anchor" href="#rebase-instead-of-merge" aria-hidden="true">¶</a></h3>
+<p>The branch that you branched from has been updated (let’s call it <code>master</code>), so you need to fetch latest changes and merge that into yours with <code>git pull</code>. Instead of merging and introducing an ugly new commit for that, you can rebase and pretend that nothing ever happened in the first place.</p>
+<pre><code class="language-bash"><span class="token function">git</span> pull origin master --rebase
+</code></pre>
+<p class="note">"Why isn't that the default then?", you might ask. I'd guess they didn't want to make a feature that rewrites history part of the default behaviour.</p>
+<h3 id="squash-commits-when-you-can">Squash commits when you can <a class="title-anchor" href="#squash-commits-when-you-can" aria-hidden="true">¶</a></h3>
+<p>You need to fix a typo, update a test, or include anything else that should have actually been part of a commit previously introduced. You can create a new commit and later squash it to the initial one with rebase.</p>
+<pre><code class="language-bash"><span class="token function">git</span> commit -m <span class="token string">"Update contact form tests"</span>
+<span class="token function">git</span> rebase -i HEAD~2 <span class="token comment" spellcheck="true"># act on top of latest 2 commits</span>
+</code></pre>
+<p>Interactive rebase will show up, and you can mark that “Update contact form tests” as the commit to be squashed into a previous one by changing pick to <code>s</code> (squash).</p>
+<p>The squashed commit has to come exactly before the commit you want to squash into, so you might have to some reordering.</p>
+<h4 id="fix-up-and-save-time">Fix up and save time <a class="title-anchor" href="#fix-up-and-save-time" aria-hidden="true">¶</a></h4>
+<p>Using the <code>--fixup</code> flag along with the commit hash of the previous commit will <strong>mark a commit as a fix of an existing one</strong>. Then, when you rebase with <code>--autosquash</code>, they will… well, automatically get squashed.</p>
+<p>Let’s say we have fixed a typo in the commit <code>i2r923</code>:</p>
+<pre><code class="language-bash"><span class="token function">git</span> commit --fixup i2r923
+<span class="token function">git</span> rebase --autosquash 9ef00f2  <span class="token comment" spellcheck="true"># one commit before above</span>
+</code></pre>
+<p class="note">You can configure Git to use the <code>--autosquash</code> flag by default when rebasing. I do that so you can check <a href="https://github.com/diessica/dotfiles/blob/master/git/config">my dotfiles</a> if you're curious.</p>
+<p>Quite often, you’ll know how far you’re traveling from the current commit (HEAD). Instead of specifying hashes, you can just use <code>HEAD</code> as a reference to previous commits:</p>
+<pre><code class="language-bash"><span class="token function">git</span> commit --fixup HEAD            <span class="token comment" spellcheck="true"># fix 1 commit before HEAD</span>
+<span class="token function">git</span> rebase --autosquash -i HEAD~1  <span class="token comment" spellcheck="true"># squash latest 2 commits</span>
+</code></pre>
+<h3 id="stash-to-save-your-work-in-progress">Stash to save your work in progress <a class="title-anchor" href="#stash-to-save-your-work-in-progress" aria-hidden="true">¶</a></h3>
+<p>You want to check or change other branch’s files, but don’t want to commit unfinished work either. You can <strong>stash your work in progress</strong> (“WIP”):</p>
+<pre><code class="language-bash"><span class="token function">git</span> stash
+</code></pre>
+<p>That stores everything from your working directory into stash. It’s so useful in my day-to-day work that I honestly often cry using it.</p>
+<p>On how to get your work back, name your WIPs, or stash specific files, refer to the <a href="https://git-scm.com/book/en/v1/Git-Tools-Stashing">docs on Git staging</a>. No way I am better at explaining than the documentation itself!</p>
+<h3 id="commit-selected-chunks-of-your-work">Commit selected chunks of your work <a class="title-anchor" href="#commit-selected-chunks-of-your-work" aria-hidden="true">¶</a></h3>
+<p>Remember the “I work in a very messy way, iterating between features” excuse? This helps. (It helped me yesterday when I refactored and introduced something new to it  – should not be done altogether! –  at the same time without noticing.)</p>
+<p>Besides only adding a specific file to your commit with <code>git add</code>, you may want to add only a <strong>chunk of the file’s code</strong> to a commit. That can be achieved with the <code>--patch</code> flag:</p>
+<pre><code class="language-bash"><span class="token function">git</span> add --patch
+</code></pre>
+<p>That’s another interface you’ll have to get comfortable with. You can also try out its <code>--interactive</code> option.</p>
+<h4 id="using-vs-code">Using VS Code? <a class="title-anchor" href="#using-vs-code" aria-hidden="true">¶</a></h4>
+<p>VS Code has a powerful built-in Git editor that allows you to add chunks of code to a commit. To stage specific lines to commit later, open VS Code’s Git editor, select the lines of code you feel should go into a commit, and “Stage selected changes” by right-clicking on it.</p>
+<figure style="text-align: center;"><picture><img src="../../media/2018/vs-code-stage-selected-changes.png" alt="Showing how to use 'Stage Selected Changes' in VS Code"></picture>
+<figcaption>Changed the whole thing but want to commit only a chunk of it? VS Code has got you covered.</figcaption></figure>
+<p>The <a href="https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette">Command Palette</a> also has a “Git: Stage selected changes” option.</p>
+<h3 id="rename-commit-messages-for-meaning">Rename commit messages for meaning <a class="title-anchor" href="#rename-commit-messages-for-meaning" aria-hidden="true">¶</a></h3>
+<p>You had a look at the final history and found out your commit messages need some love. To change your latest commit (HEAD), you can just do <code>git commit --amend</code>; for other commits, you’ll have to rebase.</p>
+<p>Let’s say you want to fix the latest 5 commits:</p>
+<pre><code class="language-bash"><span class="token function">git</span> rebase -i @~5
+</code></pre>
+<p>That will open up the <strong>interactive rebase</strong> you’re already familiar with. Find the commit you want, change pick to <code>e</code> (edit), and save and close the file; after Git rewinds to that commit, edit its message with <code>git commit --amend</code>, and run <code>git rebase --continue</code> when you’re done.</p>
+<h2 id="got-a-clear-history-push-it">Got a clear history? Push it! <a class="title-anchor" href="#got-a-clear-history-push-it" aria-hidden="true">¶</a></h2>
+<blockquote>
+<p>Commit Often, Perfect Later, Publish Once.<sup class="footnote-ref"><a href="#fn1" id="fnref1:1">[1:1]</a></sup></p>
+</blockquote>
+<p>Make sure that your branch has got a clear, readable and meaningful history…</p>
+<pre><code class="language-bash"><span class="token function">git</span> log --oneline
+</code></pre>
+<p>Then push it into the remote repository!</p>
+<pre><code class="language-bash"><span class="token function">git</span> push origin <span class="token function">head</span>
+</code></pre>
+<p class="note"> If you have already pushed (Y THO???!), you can (carefully) use the force option (<code>-f</code>) to rewrite the remote history.</p>
+<h2 id="extra-fixing-the-first-history">Extra: Fixing the first history <a class="title-anchor" href="#extra-fixing-the-first-history" aria-hidden="true">¶</a></h2>
+<p>Remember the first history?  We can fix it. It’s definitely harder to change it after it’s done, but totally doable with <code>rebase -i</code>. A possible solution would be:</p>
+<pre><code class="language-sh">squash [290xx26] Resolve merge conflicts
+pick [9efxxf2] Refactor event listener for form fields
+squash [5d9xx5a] Update snapshots
+squash [948xxfa] Update dispatch event
+delete [f5xxea1] WIP
+delete [f8xxaae] Revert change
+delete [49xxf55e] Revert changes
+squash [02xxdf1] Update snapshots
+squash [21xx329] Pass down prop
+pick [28xxa865] Fix onChange event and add minimal design  in form
+squash [cfxx37c] U[date snapshots
+pick [cfxx36c] Update form to handle onChange event for autofill
+fixup [242xx25] Fix another bug with onChange
+squash [f7xx738] Update form component
+squash [09xx868] Update snapshots
+</code></pre>
+<p><strong>Be mindful about your decisions and make sure you are not losing work along the way</strong>.  I deleted commits unused commits (WIP then reverted), squashed “fix” and “update tests” commits, and then picked only those that are meaningful batches of work.</p>
+<p>I could have also split <code>Fix onChange event and add minimal design in form</code> into two separate commits… But that’s for a future post.</p>
+<h2 id="final-considerations">Final considerations <a class="title-anchor" href="#final-considerations" aria-hidden="true">¶</a></h2>
+<p>Nowadays, I can say for sure that Git helps me to work better.  Those techniques you’ve learned are all part of my daily workflow.</p>
+<p>There is always something I don’t know about Git though, so I keep exploring. I recommend you do to do the same, and you can start right from your command line:</p>
+<pre><code class="language-bash"><span class="token function">git</span> <span class="token function">help</span> -w reset
+</code></pre>
+<p>Finally, if somehow you don’t feel comfortable with moving around your work from the command line, I’d recommend Git GUI clients<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup> – they are powerful and simplify visualising branches and its commits, especially when it gets tough<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>.</p>
+<p>I hope you have better, more sane, work days after that!</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="http://sethrobertson.github.io/GitBestPractices/">Commit Often, Perfect Later, Publish Once: Git Best Practices</a> by Seth Robertson. <a href="#fnref1" class="footnote-backref">↩︎</a> <a href="#fnref1:1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>Some clients I can think of: <a href="https://desktop.github.com/">GitHub’s Git client</a> (free), <a href="https://www.gitkraken.com/">Git Kraken</a> (free), <a href="https://www.git-tower.com/">Git Tower</a> (paid). <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>It will get tough, because source code management is not easy. Anyhow, it’s always tougher when you care about things anyway. Easiest thing is not to care about anything at all. <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+
+  <footer class="article-footer">
+
+    <div class="wrapper">
+        
+        
+          <p class="tags">
+            <b>Tags</b>:
+            <a class="tag-link" href="/blog/tags/git/">git</a>
+          </p>
+          
+          <a class="article-comment" href="https://github.com/diessica/diessica.github.io/issues/new?title=[Discussion] Working Better with Git for a Clear History&body=> About https://diessi.ca/blog/working-better-with-git-for-a-clear-history/"">Add a comment</a>
+  </div>
+  
+  
+    <hr class="-long">
+  
+    
+    <nav class="article-navigation">
+  
+      
+      <a class="item -prev" href="/blog/computer-and-human-languages/">
+        
+        Computer and Human Languages
+        
+      </a>
+      
+  
+      
+      <a class="item -next" href="/blog/how-i-lock-my-bike-in-berlin/">
+        
+        How I Lock My Bike in Berlin
+        
+      </a>
+       
+  
+    </nav>
+    
+  </footer>
+
+</article>
+    </div>
+  </main>
+
+  <script src="https://use.typekit.net/kgi4nfh.js"></script>
+  <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+</body>
+</html>

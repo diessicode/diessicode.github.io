@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link type="text/plain" rel="author" href="/humans.txt">
+  
+  <title>
+    
+    Mass Deleting Files from Slack
+    
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Diéssica Gurskas">
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <meta name="twitter:site" content="@diessicode">
+  <!--   <meta property="twitter:image:src" content="https://diessi.ca/media/social.png">
+  <meta property="og:image" content="https://diessi.ca/media/social.png">
+  <meta itemprop="image" content="https://diessi.ca/media/social.png"/> -->
+
+  
+  <meta name="description" content="Slack comes with limited file storage, so you eventually run out of space. Deleting files isn’t easy though: there is no way to bulk delete them using...">
+  <meta property="og:description" content="Slack comes with limited file storage, so you eventually run out of space. Deleting files isn’t easy though: there is no way to bulk delete them using...">
+  <meta itemprop="description" content="Slack comes with limited file storage, so you eventually run out of space. Deleting files isn’t easy though: there is no way to bulk delete them using...">
+  <meta name="twitter:description" content="Slack comes with limited file storage, so you eventually run out of space. Deleting files isn’t easy though: there is no way to bulk delete them using...">
+  
+  <link rel="alternative" href="https://diessi.ca/feed.xml" type="application/atom+xml">
+  <link rel="manifest" href="https://diessi.ca/manifest.json">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/assets/images/icons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/assets/images/icons/favicon-16x16.png" sizes="16x16">
+  <link rel="mask-icon" href="/assets/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="theme-color" content="#b45f06">
+  <link rel="stylesheet" href="/assets/styles/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism-solarizedlight.min.css">
+
+  
+</head>
+
+
+<body>
+
+  <main>
+    <header>
+  <nav class="menu">
+    <a
+      href="/"
+      class="menu-item -home ">
+        diessi.ca
+    </a>
+
+    
+      <a
+        href="/blog"
+        class="menu-item -active"
+      >
+        Blog
+      </a>
+    
+      <a
+        href="/about"
+        class="menu-item"
+      >
+        About
+      </a>
+    
+      <a
+        href="/work"
+        class="menu-item"
+      >
+        Work
+      </a>
+    
+  </nav>
+</header>
+
+
+    <div class="content">
+      <article id="post-mass-deleting-files-from-slack" class="article">
+  <header class="header">
+    <a href="/blog/mass-deleting-files-from-slack/">
+      <time class="article-date" datetime="2016-04-17T03:10:15.000Z
+      ">
+        April 17, 2016
+      </time>
+    </a>
+
+    <h1 class="article-title">
+      Mass Deleting Files from Slack
+    </h1>
+  </header>
+
+  <p>Slack comes with limited file storage, so you eventually run out of space. Deleting files isn’t easy though: there is no way to <strong>bulk delete</strong> them using the web interface.</p>
+<blockquote>
+<p>Slack forces you to delete one by one.</p>
+</blockquote>
+<p>And although Slack can force humans, it can’t force JavaScript. So JavaScript to the rescue!</p>
+<h2 id="how-to-delete-multiple-files-from-slack">How to delete multiple files from Slack <a class="title-anchor" href="#how-to-delete-multiple-files-from-slack" aria-hidden="true">¶</a></h2>
+<p>In order to free up space, you’ll need;</p>
+<ul>
+<li><a href="https://nodejs.org/">Node.js</a> version 5 or later;</li>
+<li>A Slack token, which you can get from <a href="https://api.slack.com/docs/oauth-test-tokens">Slack API docs</a>;</li>
+<li>A terminal.</li>
+</ul>
+<h3 id="installing">Installing <a class="title-anchor" href="#installing" aria-hidden="true">¶</a></h3>
+<p>Open your terminal and install <code>slack-delete-files</code> package globally using Node Package Manager:</p>
+<pre><code class="language-sh">$ npm install -g slack-delete-files
+</code></pre>
+<h3 id="running">Running <a class="title-anchor" href="#running" aria-hidden="true">¶</a></h3>
+<pre><code class="language-sh">$ slack-delete-files
+</code></pre>
+<div class="note">
+<p>You’ll be asked for your Slack token and whether you want to delete <em>all files</em> or only <em>files older than 30 days</em>.</p>
+</div>
+<h3 id="done">Done! <a class="title-anchor" href="#done" aria-hidden="true">¶</a></h3>
+<p>Your space is probably back!</p>
+<p>After deleting, you can uninstall the package:</p>
+<pre><code class="language-sh">$ npm uninstall -g slack-delete-files
+</code></pre>
+<p><a href="https://github.com/diessica/slack-delete-files">Contribute on GitHub</a>.</p>
+
+
+  <footer class="article-footer">
+
+    <div class="wrapper">
+        
+        
+          <a class="article-comment" href="https://github.com/diessica/diessica.github.io/issues/new?title=[Discussion] Mass Deleting Files from Slack&body=> About https://diessi.ca/blog/mass-deleting-files-from-slack/"">Add a comment</a>
+  </div>
+  
+  
+    <hr class="-long">
+  
+    
+    <nav class="article-navigation">
+  
+      
+      <a class="item -prev" href="/blog/a-fantastica-diversidade-do-front-end/">
+        
+        A Fantástica Diversidade do Front-end
+        
+      </a>
+      
+  
+      
+      <a class="item -next" href="/blog/o-css-do-futuro/">
+        
+        O CSS do Futuro
+        
+      </a>
+       
+  
+    </nav>
+    
+  </footer>
+
+</article>
+    </div>
+  </main>
+
+  <script src="https://use.typekit.net/kgi4nfh.js"></script>
+  <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+</body>
+</html>

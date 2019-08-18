@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link type="text/plain" rel="author" href="/humans.txt">
+  
+  <title>
+    
+    React and Form Management: Is Redux Form Worth It?
+    
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Diéssica Gurskas">
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <meta name="twitter:site" content="@diessicode">
+  <!--   <meta property="twitter:image:src" content="https://diessi.ca/media/social.png">
+  <meta property="og:image" content="https://diessi.ca/media/social.png">
+  <meta itemprop="image" content="https://diessi.ca/media/social.png"/> -->
+
+  
+  <meta name="description" content="This is an improvement over my answer to a question in a Brazilian forum: &quot;is using Redux for forms worth it?&quot;, in Portuguese. It assumes previous kno...">
+  <meta property="og:description" content="This is an improvement over my answer to a question in a Brazilian forum: &quot;is using Redux for forms worth it?&quot;, in Portuguese. It assumes previous kno...">
+  <meta itemprop="description" content="This is an improvement over my answer to a question in a Brazilian forum: &quot;is using Redux for forms worth it?&quot;, in Portuguese. It assumes previous kno...">
+  <meta name="twitter:description" content="This is an improvement over my answer to a question in a Brazilian forum: &quot;is using Redux for forms worth it?&quot;, in Portuguese. It assumes previous kno...">
+  
+  <link rel="alternative" href="https://diessi.ca/feed.xml" type="application/atom+xml">
+  <link rel="manifest" href="https://diessi.ca/manifest.json">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/assets/images/icons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/assets/images/icons/favicon-16x16.png" sizes="16x16">
+  <link rel="mask-icon" href="/assets/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="theme-color" content="#b45f06">
+  <link rel="stylesheet" href="/assets/styles/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism-solarizedlight.min.css">
+
+  
+</head>
+
+
+<body>
+
+  <main>
+    <header>
+  <nav class="menu">
+    <a
+      href="/"
+      class="menu-item -home ">
+        diessi.ca
+    </a>
+
+    
+      <a
+        href="/blog"
+        class="menu-item -active"
+      >
+        Blog
+      </a>
+    
+      <a
+        href="/about"
+        class="menu-item"
+      >
+        About
+      </a>
+    
+      <a
+        href="/work"
+        class="menu-item"
+      >
+        Work
+      </a>
+    
+  </nav>
+</header>
+
+
+    <div class="content">
+      <article id="post-react-and-form-management-is-redux-form-worth-it" class="article">
+  <header class="header">
+    <a href="/blog/react-and-form-management-is-redux-form-worth-it/">
+      <time class="article-date" datetime="2018-05-21T21:14:00.000Z
+      ">
+        May 21, 2018
+      </time>
+    </a>
+
+    <h1 class="article-title">
+      React and Form Management: Is Redux Form Worth It?
+    </h1>
+  </header>
+
+  <p class="note">This is an improvement over my answer to a question in a Brazilian forum: "<a href="https://github.com/frontendbr/forum/issues/929">is using Redux for forms worth it?</a>", in Portuguese. It assumes previous knowledge with React and Redux, and also mentions <a href="https://redux-form.com/">Redux Form</a>, a library for managing forms in React.</p>
+<p>It depends.</p>
+<p>I know “it depends” is far from an interesting answer, yet that’s the perfect-generic answer to any <em>“is using X worth it?”</em> question. It really depends, yes, but more often you don’t need that.</p>
+<p>Last year I picked Redux Form to build a multi-step form wizard, each step containing different forms, with its own fields and validations (some of them asynchronous!). In the end, all forms would be merged into one JavaScript object to be sent at some point.</p>
+<p>So, I’d like to share my experiences and hopefully help you to figure it out what your problem is, and help you to decide by telling you how I’ve solved mine.</p>
+<h2 id="where-redux-form-thrives">Where Redux Form thrives <a class="title-anchor" href="#where-redux-form-thrives" aria-hidden="true">¶</a></h2>
+<p><a href="https://redux-form.com/">Redux Form</a> is useful for larger and more complex forms where <strong>ease of development</strong>, <strong>high control</strong> (especially), <strong>consistency</strong>, and <strong>persistence</strong> (especially) are required. There are advantages from:</p>
+<ol>
+<li>the state form being in the Redux store, and</li>
+<li>Redux Form’s abstraction itself.</li>
+</ol>
+<p>Which are two different things. You might need both, just one, or none at all.</p>
+<h3 id="ease-of-development">Ease of development <a class="title-anchor" href="#ease-of-development" aria-hidden="true">¶</a></h3>
+<p>Considering you are using <a href="https://redux-form.com/7.3.0/docs/api/field.md/">Redux Form’s Field</a> and wrap your form in its <a href="https://redux-form.com/7.3.0/docs/api/reduxform.md/">higher-order component</a> – you’re done. Your form will work out of the box.</p>
+<p class="note">Yes, you could also get to build forms in a productive way with only React, but I think it's still worth-mentioning that Redux Form makes it really painless.</p>
+<h3 id="high-control">High control <a class="title-anchor" href="#high-control" aria-hidden="true">¶</a></h3>
+<p>You can manipulate forms from anywhere in the application: you trigger Redux actions provided by Redux Form and that’s all. No need to create your own Redux reducers and actions.</p>
+<p>Redux Form is also flexible on what can be an input. <strong>Anything works as a field</strong>: custom 3rd-party inputs, a regular HTML input, a fancy select component without any standard form element at all… Just pass the right props to it.</p>
+<p>You can set up validation at the form and field level, supporting either synchronous or asynchronous validation. The errors triggered are also in the store – which makes it sweet to give useful feedbacks for users from anywhere, and also to debug! 👌</p>
+<h3 id="consistency">Consistency <a class="title-anchor" href="#consistency" aria-hidden="true">¶</a></h3>
+<p>All forms have the same data structure so you’d have the exact same information for every form and its fields, such as field values, field/form validity and further information (is the field touched? Pristine? Dirty?) in the Redux store.</p>
+<p>Of course you can build forms consistently just by using React itself, but using Redux Form definitely enforces it.</p>
+<h3 id="persistence">Persistence <a class="title-anchor" href="#persistence" aria-hidden="true">¶</a></h3>
+<p>Since the state is already in the Redux store, Redux Form is easily pluggable with tools from the ecosystem.</p>
+<p>Let’s say you want to save drafts from user’s inputs so people can finish and submit the form later. Redux Form + <a href="https://github.com/rt2zz/redux-persist">redux-persist</a> make it pretty easy: the rehydrate process in the Redux store autofills the UI like magic!</p>
+<h2 id="where-redux-form-might-die">Where Redux Form might die <a class="title-anchor" href="#where-redux-form-might-die" aria-hidden="true">¶</a></h2>
+<p class="note">In the thread, someone mentioned the article <a href="https://matwrites.com/redux-form-is-dead/">Redux Form is dead.</a> <b>TL;DR</b>: It's not fucking dead, as any library, framework and whatsoever that has an "X is dead" post for it.</p>
+<p>Let’s not forget that the JavaScript community is flooded with “X is dead” articles for everything in the ecosystem. That post, in particular, mentions valid points to consider such as ephemerality of the state (quoting Dan Abramov), performance issues within Redux Form, and the project maintenance/activity. I will go through them a bit.</p>
+<h3 id="form-data-in-the-redux-store">Form data in the Redux store <a class="title-anchor" href="#form-data-in-the-redux-store" aria-hidden="true">¶</a></h3>
+<p><a href="https://twitter.com/dan_abramov">Dan Abramov</a>, creator of Redux, <a href="https://github.com/reduxjs/redux/issues/1287#issuecomment-175351978">said</a>: <em>“Use React for ephemeral state that doesn’t matter to the app globally and doesn’t mutate in complex ways. For example, a toggle in some UI element, a form input state. […]”.</em></p>
+<p>Which is completely accurate. Where your state should live in your app depends entirely on its <strong>ephemerality</strong> – how trivial it is for the application as a whole when it comes to reading, updating it and so on.</p>
+<p>In the post, that quote is used to support the claim that Redux Form fucks up when stores all form data in the Redux store by default – a <strong>pretty bold design decision</strong> for sure.</p>
+<p>However, Dan did not write that in stone – he never does and he’s clear about it. That should serve as an encouragement for developers to think better about where your application’s states should go into. So, yes, you should think twice – and that doesn’t kill Redux Form.</p>
+<p>The state of a form wizard, whose input data persists until the end of the steps (in a session or local level, for instance), whose inputs may trigger UI changes, whose inputs gets touched and changed by external components, it’s definitely <strong>not as ephemeral as the state of a newsletter sign up or a contact form</strong>. In the former, the form state is important for the whole application. Just notice that’s a very specific case.</p>
+<h3 id="performance-issues">Performance issues <a class="title-anchor" href="#performance-issues" aria-hidden="true">¶</a></h3>
+<p>Redux Form has reached a well-optimised (see <a href="https://github.com/erikras/redux-form/issues/529">redux-form #529</a> and <a href="https://github.com/erikras/redux-form/issues/1405">redux-form #1405</a>) state.</p>
+<p>When it comes to performance, though, you should never rest easy anyway. If you measure and find that your forms are slow, you should find bottlenecks and optimise from that.</p>
+<h3 id="project-activity">Project activity <a class="title-anchor" href="#project-activity" aria-hidden="true">¶</a></h3>
+<p>Regarding the project activity, it is something to consider when deciding, and should always be. Is it active? Are there people maintaining it? Can YOU help to maintain it?</p>
+<p>Yes, Erik (the author) has recently started working on another solution called <a href="https://github.com/final-form/final-form">Final Form</a>, which moves the form state out of the Redux store. However, Redux Form is mature, still well maintained (<a href="https://github.com/erikras/redux-form">check GitHub</a>, and he even said it himself <a href="https://www.reddit.com/r/reactjs/comments/7fukt7/introducing_react_final_form_high_performance/dqf8lw1/?utm_content=permalink&amp;utm_medium=front&amp;utm_source=reddit&amp;utm_name=reactjs">on Reddit</a>), and its documentation is great.</p>
+<h2 id="final-words">Final words <a class="title-anchor" href="#final-words" aria-hidden="true">¶</a></h2>
+<p>Only if the state of your form is non-trivial enough to live in the Redux store, I’d give it a chance for Redux Form, <strong>especially</strong> if you are considering making your own solution. Redux Form has suffered and evolved a lot and nowadays it has a very stable and mature API you can count on, I’d say.</p>
+<p>Other React form management solutions you should definitely be looking at are <a href="https://github.com/jaredpalmer/formik">Formik</a> and <a href="https://github.com/final-form/react-final-form">react-final-form</a>, by Redux Form’s author. They don’t rely on Redux for state management and are most likely what you need now – or not.</p>
+<p>The price is the abstraction, of course, it always is. 🙄 However, their everyday API is indeed minimal though, just be prepared to go through the documentation when you need to achieve specific stuff. In return, don’t forget you’ll get a consistent and solid structure to build forms upon.</p>
+<p>Have fun building forms! 🎉</p>
+
+
+  <footer class="article-footer">
+
+    <div class="wrapper">
+        
+        
+          <p class="tags">
+            <b>Tags</b>:
+            <a class="tag-link" href="/blog/tags/javascript/">javascript</a>, <a class="tag-link" href="/blog/tags/react/">react</a>
+          </p>
+          
+          <a class="article-comment" href="https://github.com/diessica/diessica.github.io/issues/new?title=[Discussion] React and Form Management: Is Redux Form Worth It?&body=> About https://diessi.ca/blog/react-and-form-management-is-redux-form-worth-it/"">Add a comment</a>
+  </div>
+  
+  
+    <hr class="-long">
+  
+    
+    <nav class="article-navigation">
+  
+      
+      <a class="item -prev" href="/blog/ttt/">
+        
+        T. T. T.
+        
+      </a>
+      
+  
+      
+      <a class="item -next" href="/blog/computer-and-human-languages/">
+        
+        Computer and Human Languages
+        
+      </a>
+       
+  
+    </nav>
+    
+  </footer>
+
+</article>
+    </div>
+  </main>
+
+  <script src="https://use.typekit.net/kgi4nfh.js"></script>
+  <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+</body>
+</html>

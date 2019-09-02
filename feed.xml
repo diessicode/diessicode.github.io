@@ -5,7 +5,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://diessi.ca/"/>
-  <updated>2019-08-18T22:28:59.763Z</updated>
+  <updated>2019-09-02T15:26:45.070Z</updated>
   <id>https://diessi.ca/</id>
   
   <author>
@@ -16,19 +16,20 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Setup for Audio Inteface with Guitar Rig 5 on macOS Mojave</title>
+    <title>Setup for Audio Interface with Guitar Rig 5 on macOS Mojave</title>
     <link href="https://diessi.ca/blog/guitar-rig-macos-mojave-setup/"/>
     <id>https://diessi.ca/blog/guitar-rig-macos-mojave-setup/</id>
     <published>2019-08-19T01:19:05.000Z</published>
-    <updated>2019-08-18T22:28:59.763Z</updated>
+    <updated>2019-09-02T15:26:45.070Z</updated>
     
-    <content type="html"><![CDATA[<p>Had some trouble setting up <a href="https://www.native-instruments.com/en/products/komplete/guitar/guitar-rig-5-pro/">Guitar Rig 5</a> on macOS Mojave the other day. Listening back the guitar output not straightforward: although the signals seemed to be sent from my guitar to the audio interface, and from the interface to Guitar Rig, somehow it’d still not work. Guitar Rig 5 seems not to get it right by itself. This how I’ve fixed it.</p>
+    <content type="html"><![CDATA[<p>Setting up <a href="https://www.native-instruments.com/en/products/komplete/guitar/guitar-rig-5-pro/">Guitar Rig 5</a> on macOS Mojave seems not to be very straightforward. I had gotten the the signals were sent from my guitar to the audio interface and from the interface to Guitar Rig, but somehow it’d still not work.</p>
+<p>Instead of using my audio interface as the input <strong>and output</strong> device on Guitar Rig, I had to, instead, set up an “aggregate device”. This how you can do it too.</p>
+<p>(My specs, just so you know:)</p>
 <pre><code class="language-sh">macOS Mojave Version 10.10.14
 Guitar Rig Pro 5.2.2
 Audio Interface Steinberg UR22mkII
 </code></pre>
 <h2 id="audio-midi-setup">Audio MIDI setup <a class="title-anchor" href="#audio-midi-setup" aria-hidden="true">¶</a></h2>
-<p>Instead of using my audio interface as the input <strong>and output</strong> device on Guitar Rig, I had to use an “aggregate device”. This is how you can do it too.</p>
 <ol>
 <li>
 <p>Open “Audio MIDI setup” in your Mac. (It’s a tiny secret sound manager shipped along with the system, you’ll find it.)</p>
@@ -37,7 +38,7 @@ Audio Interface Steinberg UR22mkII
 <p>At the very bottom of the app, there is a small + (“plus”) button wherein you should select <em>“Create an aggregate device”</em>.</p>
 </li>
 <li>
-<p>Set up your “aggregate device” with your 1) audio inteface and 2) speakers/headphones/whatever – which should be all shown up there, given the setup is correct. Remember to give your device a remarkable name – I suggest <em>FUCK COMPUTERS AND AUDIO BOTH NEVER WORK</em>, or something more chill.</p>
+<p>Set up your “aggregate device” with your 1) audio inteface and 2) speakers/headphones/whatever – which should be all shown up there, given the setup is correct. Remember to give your device a remarkable name – I suggest <em>FUCK COMPUTERS AND AUDIO</em>.</p>
 </li>
 </ol>
 <figure style="text-align: center;"><picture><img src="../../media/2019/guitar-rig-macos-mojave-setup/audio-midi-setup.png"  alt="Audio MIDI Setup app open showing audio device with both devices'"></picture>
@@ -52,7 +53,7 @@ Audio Interface Steinberg UR22mkII
     
     <summary type="html">
     
-      &lt;p&gt;Had some trouble setting up &lt;a href=&quot;https://www.native-instruments.com/en/products/komplete/guitar/guitar-rig-5-pro/&quot;&gt;Guitar Rig 5&lt;/a&gt; o
+      &lt;p&gt;Setting up &lt;a href=&quot;https://www.native-instruments.com/en/products/komplete/guitar/guitar-rig-5-pro/&quot;&gt;Guitar Rig 5&lt;/a&gt; on macOS Mojave se
     
     </summary>
     

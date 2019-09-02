@@ -5,7 +5,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://diessi.ca/"/>
-  <updated>2019-09-02T15:26:45.070Z</updated>
+  <updated>2019-09-02T15:54:20.725Z</updated>
   <id>https://diessi.ca/</id>
   
   <author>
@@ -20,10 +20,11 @@
     <link href="https://diessi.ca/blog/guitar-rig-macos-mojave-setup/"/>
     <id>https://diessi.ca/blog/guitar-rig-macos-mojave-setup/</id>
     <published>2019-08-19T01:19:05.000Z</published>
-    <updated>2019-09-02T15:26:45.070Z</updated>
+    <updated>2019-09-02T15:54:20.725Z</updated>
     
-    <content type="html"><![CDATA[<p>Setting up <a href="https://www.native-instruments.com/en/products/komplete/guitar/guitar-rig-5-pro/">Guitar Rig 5</a> on macOS Mojave seems not to be very straightforward. I had gotten the the signals were sent from my guitar to the audio interface and from the interface to Guitar Rig, but somehow it’d still not work.</p>
-<p>Instead of using my audio interface as the input <strong>and output</strong> device on Guitar Rig, I had to, instead, set up an “aggregate device”. This how you can do it too.</p>
+    <content type="html"><![CDATA[<p>Setting up <a href="https://www.native-instruments.com/en/products/komplete/guitar/guitar-rig-5-pro/">Guitar Rig 5</a> on macOS Mojave seems not to be straightforward.</p>
+<p>Although I had gotten the signals to be sent from my guitar to the audio interface and from the interface to Guitar Rig, somehow it’d still not work. Instead of using my audio interface as the input <strong>and output</strong> device on Guitar Rig, I had to set up an “aggregate device”.</p>
+<p>This how you can do it too.</p>
 <p>(My specs, just so you know:)</p>
 <pre><code class="language-sh">macOS Mojave Version 10.10.14
 Guitar Rig Pro 5.2.2
@@ -2032,9 +2033,9 @@ enquire
     </summary>
     
     
-      <category term="javascript" scheme="https://diessi.ca/blog/tags/javascript/"/>
-    
       <category term="css" scheme="https://diessi.ca/blog/tags/css/"/>
+    
+      <category term="javascript" scheme="https://diessi.ca/blog/tags/javascript/"/>
     
   </entry>
   

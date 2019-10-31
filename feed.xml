@@ -5,7 +5,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="https://diessi.ca/"/>
-  <updated>2019-09-02T15:54:20.725Z</updated>
+  <updated>2019-10-31T21:25:09.360Z</updated>
   <id>https://diessi.ca/</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>How to Spy on a React Prop with Jest</title>
+    <link href="https://diessi.ca/blog/how-to-spy-on-a-prop-with-jest/"/>
+    <id>https://diessi.ca/blog/how-to-spy-on-a-prop-with-jest/</id>
+    <published>2019-10-31T16:15:42.000Z</published>
+    <updated>2019-10-31T21:25:09.360Z</updated>
+    
+    <content type="html"><![CDATA[<p>When we want to test whether a prop has been called, mocking the prop in the component is usually the preferred way. This is how it goes with <a href="https://jestjs.io/">Jest</a> and <a href="https://airbnb.io/enzyme/">Enzyme</a>:</p>
+<pre><code class="language-js"><span class="token keyword">const</span> buy <span class="token operator">=</span> jest<span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> wrapper <span class="token operator">=</span> enzyme<span class="token punctuation">.</span><span class="token function">shallow</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>buy<span class="token punctuation">}</span><span class="token operator">></span>Buy<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+wrapper<span class="token punctuation">.</span><span class="token function">simulate</span><span class="token punctuation">(</span><span class="token string">"click"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">expect</span><span class="token punctuation">(</span>buy<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBeCalled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>You may also want to spy on the prop directly, when the component is tested along with a provider passing down its props.</p>
+<pre><code class="language-js"><span class="token keyword">const</span> wrapper <span class="token operator">=</span> enzyme<span class="token punctuation">.</span><span class="token function">shallow</span><span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>ClickProvider<span class="token operator">></span>
+    <span class="token operator">&lt;</span>button<span class="token operator">></span>Buy<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>ClickProvider<span class="token operator">></span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> buy <span class="token operator">=</span> jest<span class="token punctuation">.</span><span class="token function">spyOn</span><span class="token punctuation">(</span>wrapper<span class="token punctuation">.</span><span class="token function">instance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>props<span class="token punctuation">,</span> <span class="token string">"onClick"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+wrapper<span class="token punctuation">.</span><span class="token function">simulate</span><span class="token punctuation">(</span><span class="token string">"click"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">expect</span><span class="token punctuation">(</span>buy<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBeCalled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>I am using Enzyme however you should be able to spy on similarly using other testing libraries – just make sure you are spying on a function in the props coming from the component prototype (as in <code>wrapper.instance()</code>).</p>
+<p>That’s all. Just posting it here cuz I couldn’t find it easily anywhere else.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;When we want to test whether a prop has been called, mocking the prop in the component is usually the preferred way. This is how it goes 
+    
+    </summary>
+    
+    
+      <category term="react" scheme="https://diessi.ca/blog/tags/react/"/>
+    
+  </entry>
   
   <entry>
     <title>Setup for Audio Interface with Guitar Rig 5 on macOS Mojave</title>
@@ -668,9 +710,9 @@ My favourite fruits are watermelon<span class="token punctuation">,</span> banan
     </summary>
     
     
-      <category term="language" scheme="https://diessi.ca/blog/tags/language/"/>
-    
       <category term="software" scheme="https://diessi.ca/blog/tags/software/"/>
+    
+      <category term="language" scheme="https://diessi.ca/blog/tags/language/"/>
     
   </entry>
   
@@ -735,9 +777,9 @@ My favourite fruits are watermelon<span class="token punctuation">,</span> banan
     </summary>
     
     
-      <category term="javascript" scheme="https://diessi.ca/blog/tags/javascript/"/>
-    
       <category term="react" scheme="https://diessi.ca/blog/tags/react/"/>
+    
+      <category term="javascript" scheme="https://diessi.ca/blog/tags/javascript/"/>
     
   </entry>
   
@@ -1534,9 +1576,9 @@ the cryptic admonishment&lt;br /&gt;
     </summary>
     
     
-      <category term="personal" scheme="https://diessi.ca/blog/tags/personal/"/>
-    
       <category term="pt-BR" scheme="https://diessi.ca/blog/tags/pt-br/"/>
+    
+      <category term="personal" scheme="https://diessi.ca/blog/tags/personal/"/>
     
   </entry>
   
@@ -1813,9 +1855,9 @@ defaults <span class="token function">write</span> com.apple.dock expose-animati
     </summary>
     
     
-      <category term="javascript" scheme="https://diessi.ca/blog/tags/javascript/"/>
-    
       <category term="react" scheme="https://diessi.ca/blog/tags/react/"/>
+    
+      <category term="javascript" scheme="https://diessi.ca/blog/tags/javascript/"/>
     
   </entry>
   
@@ -2033,9 +2075,9 @@ enquire
     </summary>
     
     
-      <category term="css" scheme="https://diessi.ca/blog/tags/css/"/>
-    
       <category term="javascript" scheme="https://diessi.ca/blog/tags/javascript/"/>
+    
+      <category term="css" scheme="https://diessi.ca/blog/tags/css/"/>
     
   </entry>
   
@@ -2140,9 +2182,9 @@ requireHacker<span class="token punctuation">.</span><span class="token function
     </summary>
     
     
-      <category term="javascript" scheme="https://diessi.ca/blog/tags/javascript/"/>
-    
       <category term="react" scheme="https://diessi.ca/blog/tags/react/"/>
+    
+      <category term="javascript" scheme="https://diessi.ca/blog/tags/javascript/"/>
     
       <category term="test" scheme="https://diessi.ca/blog/tags/test/"/>
     
@@ -2497,9 +2539,9 @@ counter<span class="token punctuation">.</span><span class="token function">log<
     </summary>
     
     
-      <category term="pt-BR" scheme="https://diessi.ca/blog/tags/pt-br/"/>
-    
       <category term="javascript" scheme="https://diessi.ca/blog/tags/javascript/"/>
+    
+      <category term="pt-BR" scheme="https://diessi.ca/blog/tags/pt-br/"/>
     
   </entry>
   
@@ -2594,9 +2636,9 @@ counter<span class="token punctuation">.</span><span class="token function">log<
     </summary>
     
     
-      <category term="javascript" scheme="https://diessi.ca/blog/tags/javascript/"/>
-    
       <category term="react" scheme="https://diessi.ca/blog/tags/react/"/>
+    
+      <category term="javascript" scheme="https://diessi.ca/blog/tags/javascript/"/>
     
   </entry>
   
@@ -3084,11 +3126,11 @@ axios<span class="token punctuation">.</span><span class="token function">post</
     </summary>
     
     
-      <category term="pt-BR" scheme="https://diessi.ca/blog/tags/pt-br/"/>
+      <category term="react" scheme="https://diessi.ca/blog/tags/react/"/>
     
       <category term="javascript" scheme="https://diessi.ca/blog/tags/javascript/"/>
     
-      <category term="react" scheme="https://diessi.ca/blog/tags/react/"/>
+      <category term="pt-BR" scheme="https://diessi.ca/blog/tags/pt-br/"/>
     
   </entry>
   
@@ -3208,9 +3250,9 @@ axios<span class="token punctuation">.</span><span class="token function">post</
     </summary>
     
     
-      <category term="personal" scheme="https://diessi.ca/blog/tags/personal/"/>
-    
       <category term="pt-BR" scheme="https://diessi.ca/blog/tags/pt-br/"/>
+    
+      <category term="personal" scheme="https://diessi.ca/blog/tags/personal/"/>
     
   </entry>
   
@@ -3318,9 +3360,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
     </summary>
     
     
-      <category term="pt-BR" scheme="https://diessi.ca/blog/tags/pt-br/"/>
-    
       <category term="javascript" scheme="https://diessi.ca/blog/tags/javascript/"/>
+    
+      <category term="pt-BR" scheme="https://diessi.ca/blog/tags/pt-br/"/>
     
   </entry>
   
@@ -3413,9 +3455,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
     </summary>
     
     
-      <category term="pt-BR" scheme="https://diessi.ca/blog/tags/pt-br/"/>
-    
       <category term="javascript" scheme="https://diessi.ca/blog/tags/javascript/"/>
+    
+      <category term="pt-BR" scheme="https://diessi.ca/blog/tags/pt-br/"/>
     
   </entry>
   
@@ -3727,9 +3769,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
     </summary>
     
     
-      <category term="personal" scheme="https://diessi.ca/blog/tags/personal/"/>
-    
       <category term="pt-BR" scheme="https://diessi.ca/blog/tags/pt-br/"/>
+    
+      <category term="personal" scheme="https://diessi.ca/blog/tags/personal/"/>
     
   </entry>
   

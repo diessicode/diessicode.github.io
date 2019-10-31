@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link type="text/plain" rel="author" href="/humans.txt">
+  
+  <title>
+    
+    How to Spy on a React Prop with Jest
+    
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Diéssica Gurskas">
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <meta name="twitter:site" content="@diessicode">
+  <!--   <meta property="twitter:image:src" content="https://diessi.ca/media/social.png">
+  <meta property="og:image" content="https://diessi.ca/media/social.png">
+  <meta itemprop="image" content="https://diessi.ca/media/social.png"/> -->
+
+  
+  <meta name="description" content="When we want to test whether a prop has been called, mocking the prop in the component is usually the preferred way. This is how it goes with Jest and...">
+  <meta property="og:description" content="When we want to test whether a prop has been called, mocking the prop in the component is usually the preferred way. This is how it goes with Jest and...">
+  <meta itemprop="description" content="When we want to test whether a prop has been called, mocking the prop in the component is usually the preferred way. This is how it goes with Jest and...">
+  <meta name="twitter:description" content="When we want to test whether a prop has been called, mocking the prop in the component is usually the preferred way. This is how it goes with Jest and...">
+  
+  <link rel="alternative" href="https://diessi.ca/feed.xml" type="application/atom+xml">
+  <link rel="manifest" href="https://diessi.ca/manifest.json">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/assets/images/icons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/assets/images/icons/favicon-16x16.png" sizes="16x16">
+  <link rel="mask-icon" href="/assets/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="theme-color" content="#b45f06">
+  <link rel="stylesheet" href="/assets/styles/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism-solarizedlight.min.css">
+
+  
+</head>
+
+
+<body>
+
+  <main>
+    <header>
+  <nav class="menu">
+    <a
+      href="/"
+      class="menu-item -home ">
+        diessi.ca
+    </a>
+
+    
+      <a
+        href="/blog"
+        class="menu-item -active"
+      >
+        Blog
+      </a>
+    
+      <a
+        href="/about"
+        class="menu-item"
+      >
+        About
+      </a>
+    
+      <a
+        href="/work"
+        class="menu-item"
+      >
+        Work
+      </a>
+    
+  </nav>
+</header>
+
+
+    <div class="content">
+      <article id="post-how-to-spy-on-a-prop-with-jest" class="article">
+  <header class="header">
+    <a href="/blog/how-to-spy-on-a-prop-with-jest/">
+      <time class="article-date" datetime="2019-10-31T16:15:42.000Z
+      ">
+        October 31, 2019
+      </time>
+    </a>
+
+    <h1 class="article-title">
+      How to Spy on a React Prop with Jest
+    </h1>
+  </header>
+
+  <p>When we want to test whether a prop has been called, mocking the prop in the component is usually the preferred way. This is how it goes with <a href="https://jestjs.io/">Jest</a> and <a href="https://airbnb.io/enzyme/">Enzyme</a>:</p>
+<pre><code class="language-js"><span class="token keyword">const</span> buy <span class="token operator">=</span> jest<span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> wrapper <span class="token operator">=</span> enzyme<span class="token punctuation">.</span><span class="token function">shallow</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>buy<span class="token punctuation">}</span><span class="token operator">></span>Buy<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+wrapper<span class="token punctuation">.</span><span class="token function">simulate</span><span class="token punctuation">(</span><span class="token string">"click"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">expect</span><span class="token punctuation">(</span>buy<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBeCalled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>You may also want to spy on the prop directly, when the component is tested along with a provider passing down its props.</p>
+<pre><code class="language-js"><span class="token keyword">const</span> wrapper <span class="token operator">=</span> enzyme<span class="token punctuation">.</span><span class="token function">shallow</span><span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>ClickProvider<span class="token operator">></span>
+    <span class="token operator">&lt;</span>button<span class="token operator">></span>Buy<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>ClickProvider<span class="token operator">></span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> buy <span class="token operator">=</span> jest<span class="token punctuation">.</span><span class="token function">spyOn</span><span class="token punctuation">(</span>wrapper<span class="token punctuation">.</span><span class="token function">instance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>props<span class="token punctuation">,</span> <span class="token string">"onClick"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+wrapper<span class="token punctuation">.</span><span class="token function">simulate</span><span class="token punctuation">(</span><span class="token string">"click"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">expect</span><span class="token punctuation">(</span>buy<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBeCalled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>I am using Enzyme however you should be able to spy on similarly using other testing libraries – just make sure you are spying on a function in the props coming from the component prototype (as in <code>wrapper.instance()</code>).</p>
+<p>That’s all. Just posting it here cuz I couldn’t find it easily anywhere else.</p>
+
+
+  <footer class="article-footer">
+
+    <div class="wrapper">
+        
+        
+          <p class="tags">
+            <b>Tags</b>:
+            <a class="tag-link" href="/blog/tags/react/">react</a>
+          </p>
+          
+          <a class="article-comment" href="https://github.com/diessica/diessica.github.io/issues/new?title=[Discussion] How to Spy on a React Prop with Jest&body=> About https://diessi.ca/blog/how-to-spy-on-a-prop-with-jest/"">Add a comment</a>
+  </div>
+  
+  
+    <hr class="-long">
+  
+    
+    <nav class="article-navigation">
+  
+      
+      <a class="item -prev" href="/blog/guitar-rig-macos-mojave-setup/">
+        
+        Setup for Audio Interface with Guitar Rig 5 on macOS Mojave
+        
+      </a>
+      
+  
+       
+  
+    </nav>
+    
+  </footer>
+
+</article>
+    </div>
+  </main>
+
+  <script src="https://use.typekit.net/kgi4nfh.js"></script>
+  <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+</body>
+</html>
